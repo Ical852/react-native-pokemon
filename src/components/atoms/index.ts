@@ -1,3 +1,3 @@
 import Gap from './Gap';
 
-export {Gap};
+export { Gap };

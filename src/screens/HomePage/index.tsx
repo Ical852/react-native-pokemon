@@ -1,14 +1,19 @@
-import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
+import { Text, View } from 'react-native';
+import tw from 'twrnc';
 
-const HomePage = () => {
+import { HomePageProps } from '../../types';
+import { styles } from './styles';
+import { useHome } from './useHome';
+
+const HomePage: React.FC<HomePageProps> = (props) => {
+  const home = useHome(props);
+
   return (
-    <View>
+    <View style={[tw``, styles.container]}>
       <Text>HomePage</Text>
     </View>
   );
 };
 
 export default HomePage;
-
-const styles = StyleSheet.create({});

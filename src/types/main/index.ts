@@ -19,4 +19,5 @@ export interface MyPokemon {
   fibonacciIndex: string;
   createdAt: string;
   updatedAt: string;
+  detail: any;
 }

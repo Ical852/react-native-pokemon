@@ -1,6 +1,6 @@
 import axios from 'axios';
-import {pokeBaseUrl, setupEvolutions} from '../../utils';
-import {Alert} from 'react-native';
+import { Alert } from 'react-native';
+import { pokeBaseUrl, setupEvolutions } from '../../utils';
 
 export const pokemonApis = {
   getAllPokemons: async (payload: any) => {

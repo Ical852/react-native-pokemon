@@ -48,6 +48,17 @@ export const getPokeImg = (detail: any) => {
   }
   return detail.sprites.front_default;
 };
+export const getGifList = (detail: any) => {
+  const gifs = [];
+  gifs.push(detail.sprites.other.showdown.front_default);
+  Object.keys(detail.sprites.other.showdown).map((key) => {
+    if (detail.sprites.other.showdown[key] !== null && key !== 'front_default') {
+      gifs.push(detail.sprites.other.showdown[key]);
+    }
+  });
+
+  return gifs;
+}
 export const setupEvolutions = (evolutions: any, results: any) => {
   const setupEvolves = [];
 

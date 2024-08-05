@@ -1,5 +1,5 @@
-import {takeLatest, call, put} from 'redux-saga/effects';
-import {myPokemonApis} from './apis';
+import { takeLatest, call, put } from 'redux-saga/effects';
+import { myPokemonApis } from './apis';
 import {
   GET_ALL_MY_POKEMONS,
   FIND_POKEMON,
@@ -20,10 +20,24 @@ import {
   renamePokemonFailed,
 } from './actions';
 import {RESPONSE_STATUS} from '../../utils';
+import { 
+  CatchPokemonRequest,
+  CatchPokemonResponse,
+  FindPokemonRequest,
+  FindPokemonResponse,
+  GetAllMyPokemonResponse,
+  ReduxActionParams,
+  ReleasePokemonRequest,
+  ReleasePokemonResponse,
+  RenamePokemonRequest,
+  RenamePokemonResponse,
+} from '../../types';
 
-function* getAllMyPokemonsSaga() {
+function* getAllMyPokemonsSaga(): Generator {
   try {
-    const response = yield call(myPokemonApis.getAllMyPokemons);
+    const response: GetAllMyPokemonResponse = yield call(
+      myPokemonApis.getAllMyPokemons
+    );
     switch (response.status) {
       case RESPONSE_STATUS.SUCCESS:
         return yield put(getAllMyPokemonsSuccess(response));
@@ -42,14 +56,17 @@ function* getAllMyPokemonsSaga() {
           getAllMyPokemonsFailed({message: `Error: Something went wrong`}),
         );
     }
-  } catch (error) {
+  } catch (error: any) {
     yield put(getAllMyPokemonsFailed({message: `Error: ${error.message}`}));
   }
 }
 
-function* findPokemonSaga(action) {
+function* findPokemonSaga(action: ReduxActionParams): Generator {
   try {
-    const response = yield call(myPokemonApis.findPokemon, action.payload);
+    const response: FindPokemonResponse = yield call(
+      myPokemonApis.findPokemon,
+      action.payload as FindPokemonRequest
+    );
     switch (response.status) {
       case RESPONSE_STATUS.SUCCESS:
         return yield put(findPokemonSuccess(response));
@@ -68,14 +85,17 @@ function* findPokemonSaga(action) {
           findPokemonFailed({message: `Error: Something went wrong`}),
         );
     }
-  } catch (error) {
+  } catch (error: any) {
     yield put(findPokemonFailed({message: `Error: ${error.message}`}));
   }
 }
 
-function* catchPokemonSaga(action) {
+function* catchPokemonSaga(action: ReduxActionParams): Generator {
   try {
-    const response = yield call(myPokemonApis.catchPokemon, action.payload);
+    const response: CatchPokemonResponse = yield call(
+      myPokemonApis.catchPokemon,
+      action.payload as CatchPokemonRequest
+    );
     switch (response.status) {
       case RESPONSE_STATUS.SUCCESS:
         return yield put(catchPokemonSuccess(response));
@@ -94,14 +114,17 @@ function* catchPokemonSaga(action) {
           catchPokemonFailed({message: `Error: Something went wrong`}),
         );
     }
-  } catch (error) {
+  } catch (error: any) {
     yield put(catchPokemonFailed({message: `Error: ${error.message}`}));
   }
 }
 
-function* releasePokemonSaga(action) {
+function* releasePokemonSaga(action: ReduxActionParams): Generator {
   try {
-    const response = yield call(myPokemonApis.releasePokemon, action.payload);
+    const response: ReleasePokemonResponse = yield call(
+      myPokemonApis.releasePokemon,
+      action.payload as ReleasePokemonRequest
+    );
     switch (response.status) {
       case RESPONSE_STATUS.SUCCESS:
         return yield put(releasePokemonSuccess(response));
@@ -120,14 +143,17 @@ function* releasePokemonSaga(action) {
           releasePokemonFailed({message: `Error: Something went wrong`}),
         );
     }
-  } catch (error) {
+  } catch (error: any) {
     yield put(releasePokemonFailed({message: `Error: ${error.message}`}));
   }
 }
 
-function* renamePokemonSaga(action) {
+function* renamePokemonSaga(action: ReduxActionParams): Generator {
   try {
-    const response = yield call(myPokemonApis.renamePokemon, action.payload);
+    const response: RenamePokemonResponse = yield call(
+      myPokemonApis.renamePokemon,
+      action.payload as RenamePokemonRequest
+    );
     switch (response.status) {
       case RESPONSE_STATUS.SUCCESS:
         return yield put(renamePokemonSuccess(response));
@@ -146,7 +172,7 @@ function* renamePokemonSaga(action) {
           renamePokemonFailed({message: `Error: Something went wrong`}),
         );
     }
-  } catch (error) {
+  } catch (error: any) {
     yield put(releasePokemonFailed({message: `Error: ${error.message}`}));
   }
 }

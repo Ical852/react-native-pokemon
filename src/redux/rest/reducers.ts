@@ -1,6 +1,6 @@
 import * as CONST from './constants';
 import * as STATE from './initialStates';
-import {ReduxActionParams} from '../../types';
+import { ReduxActionParams } from '../../types';
 
 const myPokemonsInitialStates = {
   ...STATE.myPokemonsInitialStates,
