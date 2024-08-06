@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { Alert } from "react-native";
 import { DetailPageProps } from "../../types";
-import { getGifList } from "../../utils";
+import { getGifList, getPokeColors } from "../../utils";
 
 export const useDetail = (props: DetailPageProps) => {
   const {
@@ -41,10 +41,16 @@ export const useDetail = (props: DetailPageProps) => {
   const isDisabled = useMemo(() => {
     return isCaught && !params.id;
   }, [isCaught]);
+  const bgColor = useMemo(() => {
+    return getPokeColors(params?.detail?.types[0]?.type?.name);
+  }, [params]);
   const getGifs = useMemo(() => {
     return getGifList(params?.detail);
   }, [params]);
 
+  const onBack = useCallback(() => {
+    navigation.goBack();
+  }, [navigation]);
   const onBtnClick = useCallback(() => {
     if (isCaught) {
       Alert.alert(
@@ -131,6 +137,7 @@ export const useDetail = (props: DetailPageProps) => {
     pokemon: params,
     gifs: getGifs,
     isCaught,
+    onBack,
     onBtnClick,
     onRename,
     onConfirm,
@@ -140,5 +147,6 @@ export const useDetail = (props: DetailPageProps) => {
     setNickname,
     modalVisible,
     setModalVisible,
+    bgColor,
   };
 }

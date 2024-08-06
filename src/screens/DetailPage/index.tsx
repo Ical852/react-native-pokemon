@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { Text, View } from 'react-native';
+import { ScrollView } from 'react-native';
 import { connect } from "react-redux";
 import tw from 'twrnc';
 
@@ -22,7 +22,7 @@ import {
 } from '../../types';
 
 import { AppDispatch, RootState } from "../../redux/store";
-import { DetailModal } from './Sections';
+import { DetailModal, DetailHeader, DetaiLDesc, DetailPokemon, DetaiLData } from './Sections';
 import { styles } from './styles';
 import { useDetail } from './useDetail';
 
@@ -42,10 +42,17 @@ const DetailPage: React.FC<DetailPageProps> = (props) => {
   }, [dtl.pokemon, dtl.modalVisible, dtl.nickname]);
 
   return (
-    <View style={[tw``, styles.container]}>
+    <>
       {_renderModal}
-      <Text>DetailPage</Text>
-    </View>
+      <ScrollView 
+        showsVerticalScrollIndicator={false}
+        style={[tw`flex-1 w-full h-full`, { backgroundColor: dtl.bgColor }]}>
+        <DetailHeader onBack={dtl.onBack} />
+        <DetaiLDesc pokemon={dtl.pokemon} />
+        <DetailPokemon pokemon={dtl.pokemon} />
+        <DetaiLData />
+      </ScrollView>
+    </>
   );
 }
 

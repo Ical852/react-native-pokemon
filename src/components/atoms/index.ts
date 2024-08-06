@@ -1,3 +1,4 @@
 import Gap from './Gap';
+import Badge from './Badge';
 
-export { Gap };
+export { Gap, Badge };
