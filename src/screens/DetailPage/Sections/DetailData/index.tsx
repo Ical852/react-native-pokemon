@@ -3,12 +3,12 @@ import { Text, View } from 'react-native';
 import tw from 'twrnc';
 import { styles } from './styles';
 
-const DetaiLData = () => {
+const DetailData = () => {
   return (
     <View style={[tw``, styles.container]}>
-      <Text>DetaiLData</Text>
+      <Text>DetailData</Text>
     </View>
   );
 };
 
-export default DetaiLData;
+export default DetailData;

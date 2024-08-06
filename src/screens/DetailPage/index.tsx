@@ -21,8 +21,14 @@ import {
   RenamePokemonRequest,
 } from '../../types';
 
+import {
+  DetailModal,
+  DetailHeader,
+  DetaiLDesc,
+  DetailPokemon,
+  DetailData
+} from './Sections';
 import { AppDispatch, RootState } from "../../redux/store";
-import { DetailModal, DetailHeader, DetaiLDesc, DetailPokemon, DetaiLData } from './Sections';
 import { styles } from './styles';
 import { useDetail } from './useDetail';
 
@@ -50,7 +56,7 @@ const DetailPage: React.FC<DetailPageProps> = (props) => {
         <DetailHeader onBack={dtl.onBack} />
         <DetaiLDesc pokemon={dtl.pokemon} />
         <DetailPokemon pokemon={dtl.pokemon} />
-        <DetaiLData />
+        <DetailData />
       </ScrollView>
     </>
   );

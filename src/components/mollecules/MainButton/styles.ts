@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create<any>({
-  container: (bg) => ({
-    backgroundColor: bg ?? '#0EA5E9'
+  container: (bg: any) => ({
+    backgroundColor: bg ?? '#0EA5E9',
   }),
 });
