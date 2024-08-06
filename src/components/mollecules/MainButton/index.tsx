@@ -1,11 +1,24 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { Text, TouchableOpacity } from 'react-native';
+import tw from 'twrnc';
+import { styles } from './styles';
 
-const MainButton = () => {
+interface MainButtonProps {
+  title: string;
+  onPress: () => void;
+}
+const MainButton = (props: MainButtonProps) => {
+  const { title, onPress } = props;
+
   return (
-    <View>
-      <Text>MainButton</Text>
-    </View>
+    <TouchableOpacity
+      onPress={onPress}
+      style={[tw`py-3 rounded-md`, styles.container]}
+      activeOpacity={0.5}>
+      <Text style={[tw`text-white font-semibold text-center`]}>
+        {title}
+      </Text>
+    </TouchableOpacity>
   );
 };
 

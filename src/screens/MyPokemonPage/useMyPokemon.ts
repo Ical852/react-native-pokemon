@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { pokemonApis } from "../../redux/pokemon/apis";
 import { copyData } from "../../utils";
 import { MyPokemonPageProps } from "../../types";
+import { useFocusEffect } from "@react-navigation/native";
 
 export const useMyPokemon = (props: MyPokemonPageProps) => {
   const {
@@ -17,7 +18,8 @@ export const useMyPokemon = (props: MyPokemonPageProps) => {
   const [loading, setLoading] = useState(false);
   const [count, setCount] = useState(0);
   const [maxCount, setMaxCount] = useState(0);
-  const [pokemons, setPokemons] = useState([]);
+  const [pokemons, setPokemons]:
+  [any, React.Dispatch<React.SetStateAction<any>>] = useState({});
 
   const onClick = useCallback((pokemon: any) => {
     return navigation.navigate('Detail', { ...pokemon });
@@ -33,9 +35,11 @@ export const useMyPokemon = (props: MyPokemonPageProps) => {
     getAllMyPokemonsReset();
   }, [getAllMyPokemonsResponse]);
 
-  useEffect(() => {
-    getAllMyPokemons();
-  }, []);
+  useFocusEffect(
+    useCallback(() => {
+      getAllMyPokemons();
+    }, []),
+  )
 
   useEffect(() => {
     if (getAllMyPokemonsError) {
@@ -44,6 +48,7 @@ export const useMyPokemon = (props: MyPokemonPageProps) => {
     if (getAllMyPokemonsResponse?.status === 200) {
       setupPokemon(getAllMyPokemonsResponse?.data);
     }
+    console.log(getAllMyPokemonsResponse)
   }, [getAllMyPokemonsResponse]);
 
   return {

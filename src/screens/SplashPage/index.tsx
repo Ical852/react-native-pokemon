@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { View, Image } from 'react-native';
 import tw from 'twrnc';
 
 import { SplashPageProps } from '../../types';
@@ -10,8 +10,13 @@ const SplashPage: React.FC<SplashPageProps> = (props) => {
   const splash = useSplash(props);
   
   return (
-    <View style={[tw``, styles.container]}>
-      <Text>SplashPage</Text>
+    <View style={
+      [tw`flex-1 bg-white justify-center items-center`, styles.container]
+      }>
+      <Image
+        style={[tw``]} 
+        source={require('../../assets/images/pokemon_logo.png')}
+      />
     </View>
   );
 }

@@ -42,7 +42,7 @@ export const useDetail = (props: DetailPageProps) => {
     return isCaught && !params.id;
   }, [isCaught]);
   const getGifs = useMemo(() => {
-    return getGifList(params?.detail);
+    // return getGifList(params?.detail);
   }, [params]);
 
   const onBtnClick = useCallback(() => {

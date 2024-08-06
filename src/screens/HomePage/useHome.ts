@@ -47,7 +47,7 @@ export const useHome = (props: HomePageProps) => {
   }, [pokemons]);
 
   const onClick = useCallback((pokemon: any) => {
-    return navigation.navigate('Detail', { ...pokemon });
+    return navigation.navigate('Detail', { ...pokemon.item });
   }, [navigation]);
 
   useFocusEffect(
