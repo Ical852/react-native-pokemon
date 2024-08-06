@@ -1,8 +1,9 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 import tw from 'twrnc';
-import { styles } from './styles';
+
 import { getPokeColors } from '../../../utils';
+import { styles } from './styles';
 
 interface BadgeProps {
   type: any;
@@ -16,7 +17,9 @@ const Badge = (props: BadgeProps) => {
       tw` border border-white rounded-full px-2 py-0.5 mb-1`,
       styles.container(color)
     ]}>
-      <Text style={[tw`text-center text-white`]}>{type.type.name}</Text>
+      <Text style={[tw`text-center text-white`]}>
+        {type.type.name}
+      </Text>
     </View>
   );
 };

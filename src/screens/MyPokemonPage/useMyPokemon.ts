@@ -1,8 +1,9 @@
 import { useCallback, useEffect, useState } from "react";
+import { useFocusEffect } from "@react-navigation/native";
+
 import { pokemonApis } from "../../redux/pokemon/apis";
 import { copyData } from "../../utils";
 import { MyPokemonPageProps } from "../../types";
-import { useFocusEffect } from "@react-navigation/native";
 
 export const useMyPokemon = (props: MyPokemonPageProps) => {
   const {
@@ -48,7 +49,6 @@ export const useMyPokemon = (props: MyPokemonPageProps) => {
     if (getAllMyPokemonsResponse?.status === 200) {
       setupPokemon(getAllMyPokemonsResponse?.data);
     }
-    console.log(getAllMyPokemonsResponse)
   }, [getAllMyPokemonsResponse]);
 
   return {

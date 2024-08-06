@@ -1,4 +1,4 @@
-import {GetAllMyPokemonResponse} from './myPokemon';
+import { GetAllMyPokemonResponse } from './myPokemon';
 import {
   FindPokemonResponse,
   CatchPokemonResponse,

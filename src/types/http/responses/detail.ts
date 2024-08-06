@@ -1,4 +1,4 @@
-import {MyPokemon, Response} from '../../main';
+import { MyPokemon, Response } from '../../main';
 
 export interface FindPokemonResponse extends Response {
   data: MyPokemon;

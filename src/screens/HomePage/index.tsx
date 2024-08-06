@@ -41,7 +41,7 @@ const HomePage: React.FC<HomePageProps> = (props) => {
         renderItem={(item) => (
           <PokemonCard
             pokemon={item}
-            onDetail={home.onClick}
+            onDetail={() => home.onClick(item)}
           />
         )}
         keyExtractor={item => item.url}
@@ -72,7 +72,7 @@ const HomePage: React.FC<HomePageProps> = (props) => {
     <View style={[tw`flex flex-col bg-white flex-1`]}>
       <Image
         resizeMode='contain'
-        style={[tw`h-12 w-36 m-6`]}
+        style={[tw`h-12 w-36 mx-6 my-4`]}
         source={require('../../assets/images/pokemon_logo.png')}
       />
       {_renderContent}
