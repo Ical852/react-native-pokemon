@@ -6,7 +6,7 @@ export const useSplash = (props: SplashPageProps) => {
   
   useEffect(() => {
     setTimeout(() => {
-      navigation.navigate('Main');
+      (navigation as any).replace('Main');
     }, 2000);
   }, [navigation]);
 
