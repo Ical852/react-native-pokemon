@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Text, View } from 'react-native';
 import { connect } from "react-redux";
 import tw from 'twrnc';
@@ -22,14 +22,28 @@ import {
 } from '../../types';
 
 import { AppDispatch, RootState } from "../../redux/store";
+import { DetailModal } from './Sections';
 import { styles } from './styles';
 import { useDetail } from './useDetail';
 
 const DetailPage: React.FC<DetailPageProps> = (props) => {
   const dtl = useDetail(props);
 
+  const _renderModal = useMemo(() => {
+    return (
+      <DetailModal
+        modalVisible={dtl.modalVisible}
+        setModalVisible={dtl.setModalVisible}
+        onConfirm={dtl.onConfirm}
+        nickname={dtl.nickname}
+        setNickname={dtl.setNickname}
+      />
+    )
+  }, [dtl.pokemon, dtl.modalVisible, dtl.nickname]);
+
   return (
     <View style={[tw``, styles.container]}>
+      {_renderModal}
       <Text>DetailPage</Text>
     </View>
   );

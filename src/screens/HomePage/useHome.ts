@@ -9,13 +9,14 @@ export const useHome = (props: HomePageProps) => {
   const [loading, setLoading] = useState(false);
   const [extending, setExtending] = useState(false);
   const [count, setCount] = useState(0);
-  const [pokemons, setPokemons]: any = useState({});
+  const [pokemons, setPokemons]:
+  [any, React.Dispatch<React.SetStateAction<any>>] = useState({});
 
   const getPokemonData = useCallback(
     async (
       setLoading: React.Dispatch<React.SetStateAction<boolean>>,
       url = null,
-      results = []
+      results = [],
     ) => {
       setLoading(true);
       const response = await pokemonApis.getAllPokemons({
@@ -38,14 +39,15 @@ export const useHome = (props: HomePageProps) => {
 
       setCount(0);
       setLoading(false);
-    }, [pokemons]);
+    }, [pokemons]
+  );
 
   const onExtend = useCallback(() => {
     getPokemonData(setExtending, pokemons?.next, pokemons?.results);
   }, [pokemons]);
 
   const onClick = useCallback((pokemon: any) => {
-    return navigation.navigate('Detail', pokemon);
+    return navigation.navigate('Detail', { ...pokemon });
   }, [navigation]);
 
   useFocusEffect(

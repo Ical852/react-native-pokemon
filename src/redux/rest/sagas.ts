@@ -19,7 +19,6 @@ import {
   renamePokemonSuccess,
   renamePokemonFailed,
 } from './actions';
-import {RESPONSE_STATUS} from '../../utils';
 import { 
   CatchPokemonRequest,
   CatchPokemonResponse,
@@ -32,6 +31,7 @@ import {
   RenamePokemonRequest,
   RenamePokemonResponse,
 } from '../../types';
+import { RESPONSE_STATUS } from '../../utils';
 
 function* getAllMyPokemonsSaga(): Generator {
   try {

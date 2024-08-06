@@ -1,7 +1,7 @@
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { Alert } from "react-native";
 import { DetailPageProps } from "../../types";
 import { getGifList } from "../../utils";
-import { Alert } from "react-native";
 
 export const useDetail = (props: DetailPageProps) => {
   const {
@@ -35,35 +35,45 @@ export const useDetail = (props: DetailPageProps) => {
     },
   } = props;
   const [isCaught, setIsCaught] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [nickname, setNickname] = useState("");
 
   const isDisabled = useMemo(() => {
     return isCaught && !params.id;
   }, [isCaught]);
-
   const getGifs = useMemo(() => {
     return getGifList(params?.detail);
   }, [params]);
 
   const onBtnClick = useCallback(() => {
     if (isCaught) {
-      const confirmed = Alert.alert(('Are you sure want to release?'));
-      if (confirmed) {
-        releasePokemon({ id: params.id });
-      }
+      Alert.alert(
+        'Confirm',
+        'Are you sure want to release?',
+        [
+          {
+            text: "Cancel",
+            onPress: () => {},
+            style: 'cancel',
+          },
+          { text: "Ok", onPress: () => releasePokemon({ id: params.id }), }
+        ],
+        { cancelable: true },
+      );
     } else {
-      const nickname = window.prompt('Put pokemon nickname');
-      if (nickname) {
-        catchPokemon({ nickname, url: params.url })
-      }
+      setModalVisible(true);
     }
   }, [isCaught, params]);
-
-  const onRename = useCallback(() => {
-    const newName = prompt('Input new nicnname');
-    if (newName) {
-      renamePokemon({ id: paramState.id, nickname: newName });
+  const onConfirm = useCallback(() => {
+    setModalVisible(false);
+    if (isCaught) {
+      return renamePokemon({ id: params.id, nickname });
     }
-  }, [paramState]);
+    return catchPokemon({ nickname, url: params.url });
+  }, [nickname, params, isCaught]);
+  const onRename = useCallback(() => {
+    setModalVisible(true);
+  }, []);
 
   useEffect(() => {
     if (renamePokemonError) {
@@ -73,10 +83,9 @@ export const useDetail = (props: DetailPageProps) => {
     if (renamePokemonResponse?.status === 200) {
       alert('Success to rename pokemon');
       renamePokemonReset();
-      navigate('/my-pokemons');
+      navigation.navigate('Main');
     }
   }, [renamePokemonResponse]);
-
   useEffect(() => {
     if (catchPokemonError) {
       alert('Failed to catch pokemon, try again');
@@ -85,10 +94,9 @@ export const useDetail = (props: DetailPageProps) => {
     if (catchPokemonResponse?.status === 200) {
       alert('Success to catch pokemon');
       catchPokemonReset();
-      navigate('/');
+      navigation.navigate('Main');
     }
   }, [catchPokemonResponse]);
-
   useEffect(() => {
     if (releasePokemonError) {
       alert('Release pokemon failed');
@@ -97,14 +105,12 @@ export const useDetail = (props: DetailPageProps) => {
     if (releasePokemonResponse?.status === 200) {
       alert('Release pokemon success');
       releasePokemonReset();
-      navigate('/my-pokemons')
+      navigation.navigate('Main');
     }
   }, [releasePokemonResponse]);
-
   useEffect(() => {
-    findPokemon({ url: paramState.url });
+    findPokemon({ url: params.url });
   }, []);
-
   useEffect(() => {
     if (findPokemonError) {
       setIsCaught(false);
@@ -112,17 +118,27 @@ export const useDetail = (props: DetailPageProps) => {
     }
     if (findPokemonResponse?.status === 200) {
       setIsCaught(true);
+      findPokemonReset();
     }
   }, [findPokemonResponse]);
 
   return {
-    loading: findPokemonLoading || catchPokemonLoading || releasePokemonLoading || renamePokemonLoading,
-    pokemon: paramState,
+    loading:
+      findPokemonLoading ||
+      catchPokemonLoading ||
+      releasePokemonLoading ||
+      renamePokemonLoading,
+    pokemon: params,
     gifs: getGifs,
     isCaught,
     onBtnClick,
     onRename,
+    onConfirm,
     isDisabled,
-    isMine: paramState.id
+    isMine: params.id,
+    nickname,
+    setNickname,
+    modalVisible,
+    setModalVisible,
   };
 }
