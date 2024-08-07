@@ -1,5 +1,5 @@
 export const pokeBaseUrl = 'https://pokeapi.co/api/v2/';
-export const restBaseUrl = 'http://192.168.137.1:5000/api/';
+export const restBaseUrl = 'http://10.0.2.2:5000/api/';
 export const RESPONSE_STATUS = {
   SUCCESS: 200,
   CREATED: 201,

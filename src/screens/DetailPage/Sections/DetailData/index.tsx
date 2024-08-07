@@ -24,11 +24,11 @@ const DetailData = (props: DetailDataProps) => {
       case 'About':
         return <AboutSection pokemon={pokemon} />;
       case 'Base Stat':
-        return <BaseStatSection pokemon={pokemon} />;
+        return <BaseStatSection pokemon={pokemon} bg={dtl.bgColor} />;
       case 'Evolutions':
-        return <EvolutionsSection pokemon={pokemon} />;
+        return <EvolutionsSection pokemon={pokemon} bg={dtl.bgColor} />;
       case 'Moves':
-        return <MovesSection pokemon={pokemon} />;
+        return <MovesSection pokemon={pokemon} bg={dtl.bgColor} />;
       default:
         return <AboutSection pokemon={pokemon} />;
     }

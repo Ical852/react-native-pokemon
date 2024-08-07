@@ -39,7 +39,7 @@ const MyPokemonPage: React.FC<MyPokemonPageProps> = props => {
         <View style={[tw`flex-1 justify-center items-center`]}>
           <ActivityIndicator color={'#0EA5E9'} size={36} />
           <Text style={[tw`text-sm text-black font-semibold mt-3`]}>
-            Loading Pokemon Data ...
+            Loading My Pokemon Data ...
           </Text>
           <Text style={[tw`text-sm text-black font-semibold`]}>
             {mypoke.count} / {mypoke.maxCount}
