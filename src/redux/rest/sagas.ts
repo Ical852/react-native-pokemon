@@ -1,5 +1,5 @@
-import { takeLatest, call, put } from 'redux-saga/effects';
-import { myPokemonApis } from './apis';
+import {takeLatest, call, put} from 'redux-saga/effects';
+import {myPokemonApis} from './apis';
 import {
   GET_ALL_MY_POKEMONS,
   FIND_POKEMON,
@@ -19,7 +19,7 @@ import {
   renamePokemonSuccess,
   renamePokemonFailed,
 } from './actions';
-import { 
+import {
   CatchPokemonRequest,
   CatchPokemonResponse,
   FindPokemonRequest,
@@ -31,12 +31,12 @@ import {
   RenamePokemonRequest,
   RenamePokemonResponse,
 } from '../../types';
-import { RESPONSE_STATUS } from '../../utils';
+import {RESPONSE_STATUS} from '../../utils';
 
 function* getAllMyPokemonsSaga(): Generator {
   try {
     const response: GetAllMyPokemonResponse = yield call(
-      myPokemonApis.getAllMyPokemons
+      myPokemonApis.getAllMyPokemons,
     );
     switch (response.status) {
       case RESPONSE_STATUS.SUCCESS:
@@ -65,7 +65,7 @@ function* findPokemonSaga(action: ReduxActionParams): Generator {
   try {
     const response: FindPokemonResponse = yield call(
       myPokemonApis.findPokemon,
-      action.payload as FindPokemonRequest
+      action.payload as FindPokemonRequest,
     );
     switch (response.status) {
       case RESPONSE_STATUS.SUCCESS:
@@ -94,7 +94,7 @@ function* catchPokemonSaga(action: ReduxActionParams): Generator {
   try {
     const response: CatchPokemonResponse = yield call(
       myPokemonApis.catchPokemon,
-      action.payload as CatchPokemonRequest
+      action.payload as CatchPokemonRequest,
     );
     switch (response.status) {
       case RESPONSE_STATUS.SUCCESS:
@@ -123,7 +123,7 @@ function* releasePokemonSaga(action: ReduxActionParams): Generator {
   try {
     const response: ReleasePokemonResponse = yield call(
       myPokemonApis.releasePokemon,
-      action.payload as ReleasePokemonRequest
+      action.payload as ReleasePokemonRequest,
     );
     switch (response.status) {
       case RESPONSE_STATUS.SUCCESS:
@@ -152,7 +152,7 @@ function* renamePokemonSaga(action: ReduxActionParams): Generator {
   try {
     const response: RenamePokemonResponse = yield call(
       myPokemonApis.renamePokemon,
-      action.payload as RenamePokemonRequest
+      action.payload as RenamePokemonRequest,
     );
     switch (response.status) {
       case RESPONSE_STATUS.SUCCESS:

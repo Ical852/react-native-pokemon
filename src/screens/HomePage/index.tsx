@@ -1,13 +1,13 @@
-import React, { useMemo } from 'react';
-import { Text, View, Image, ActivityIndicator, FlatList } from 'react-native';
+import React, {useMemo} from 'react';
+import {Text, View, Image, ActivityIndicator, FlatList} from 'react-native';
 import tw from 'twrnc';
 
-import { HomePageProps } from '../../types';
-import { styles } from './styles';
-import { useHome } from './useHome';
-import { MainButton, PokemonCard } from '../../components';
+import {HomePageProps} from '../../types';
+import {styles} from './styles';
+import {useHome} from './useHome';
+import {MainButton, PokemonCard} from '../../components';
 
-const HomePage: React.FC<HomePageProps> = (props) => {
+const HomePage: React.FC<HomePageProps> = props => {
   const home = useHome(props);
 
   const _renderLoadMore = useMemo(() => {
@@ -18,19 +18,18 @@ const HomePage: React.FC<HomePageProps> = (props) => {
           <Text style={[tw`text-sm text-black font-semibold mt-3`]}>
             Loading More Pokemon Data ...
           </Text>
-          <Text style={[tw`text-sm text-black font-semibold`]}>{home.count} / 20</Text>
+          <Text style={[tw`text-sm text-black font-semibold`]}>
+            {home.count} / 20
+          </Text>
         </View>
-      )
+      );
     }
 
     return (
       <View style={[tw`mx-2 mt-3`]}>
-        <MainButton
-          title='Load More'
-          onPress={home.onExtend}
-        />
+        <MainButton title="Load More" onPress={home.onExtend} />
       </View>
-    )
+    );
   }, [home.extending, home.onExtend, home.count]);
 
   const _renderList = useMemo(() => {
@@ -38,11 +37,8 @@ const HomePage: React.FC<HomePageProps> = (props) => {
       <FlatList
         showsVerticalScrollIndicator={false}
         data={home.pokemons?.results}
-        renderItem={(item) => (
-          <PokemonCard
-            pokemon={item}
-            onDetail={() => home.onClick(item)}
-          />
+        renderItem={item => (
+          <PokemonCard pokemon={item} onDetail={() => home.onClick(item)} />
         )}
         keyExtractor={item => item.url}
         numColumns={2}
@@ -61,9 +57,11 @@ const HomePage: React.FC<HomePageProps> = (props) => {
           <Text style={[tw`text-sm text-black font-semibold mt-3`]}>
             Loading Pokemon Data ...
           </Text>
-          <Text style={[tw`text-sm text-black font-semibold`]}>{home.count} / 20</Text>
+          <Text style={[tw`text-sm text-black font-semibold`]}>
+            {home.count} / 20
+          </Text>
         </View>
-      )
+      );
     }
     return _renderList;
   }, [home.loading, home.count, _renderList]);
@@ -71,7 +69,7 @@ const HomePage: React.FC<HomePageProps> = (props) => {
   return (
     <View style={[tw`flex flex-col bg-white flex-1`]}>
       <Image
-        resizeMode='contain'
+        resizeMode="contain"
         style={[tw`h-12 w-36 mx-6 my-4`]}
         source={require('../../assets/images/pokemon_logo.png')}
       />

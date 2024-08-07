@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { restBaseUrl } from '../../utils';
+import {restBaseUrl} from '../../utils';
 import {
   CatchPokemonRequest,
   CatchPokemonResponse,

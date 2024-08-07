@@ -1,16 +1,18 @@
-import { useCallback, useState } from 'react';
-import { useFocusEffect } from '@react-navigation/native';
-import { pokemonApis } from "../../redux/pokemon/apis";
-import { HomePageProps } from "../../types";
+import {useCallback, useState} from 'react';
+import {useFocusEffect} from '@react-navigation/native';
+import {pokemonApis} from '../../redux/pokemon/apis';
+import {HomePageProps} from '../../types';
 
 export const useHome = (props: HomePageProps) => {
-  const { navigation } = props;
+  const {navigation} = props;
 
   const [loading, setLoading] = useState(false);
   const [extending, setExtending] = useState(false);
   const [count, setCount] = useState(0);
-  const [pokemons, setPokemons]:
-  [any, React.Dispatch<React.SetStateAction<any>>] = useState({});
+  const [pokemons, setPokemons]: [
+    any,
+    React.Dispatch<React.SetStateAction<any>>,
+  ] = useState({});
 
   const getPokemonData = useCallback(
     async (
@@ -28,27 +30,28 @@ export const useHome = (props: HomePageProps) => {
       if (url) {
         setPokemons({
           ...response,
-          results: [
-            ...pokemons.results,
-            ...response.results,
-          ]
-        })
+          results: [...pokemons.results, ...response.results],
+        });
       } else {
         setPokemons(response);
       }
 
       setCount(0);
       setLoading(false);
-    }, [pokemons]
+    },
+    [pokemons],
   );
 
   const onExtend = useCallback(() => {
     getPokemonData(setExtending, pokemons?.next, pokemons?.results);
   }, [pokemons]);
 
-  const onClick = useCallback((pokemon: any) => {
-    return navigation.navigate('Detail', { ...pokemon.item });
-  }, [navigation]);
+  const onClick = useCallback(
+    (pokemon: any) => {
+      return navigation.navigate('Detail', {...pokemon.item});
+    },
+    [navigation],
+  );
 
   useFocusEffect(
     useCallback(() => {
@@ -62,6 +65,6 @@ export const useHome = (props: HomePageProps) => {
     pokemons,
     count,
     onExtend,
-    onClick
+    onClick,
   };
 };

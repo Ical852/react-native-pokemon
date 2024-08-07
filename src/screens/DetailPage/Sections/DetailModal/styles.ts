@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import {StyleSheet} from 'react-native';
 
 export const styles = StyleSheet.create({
   container: {
@@ -8,7 +8,6 @@ export const styles = StyleSheet.create({
   },
   modalView: {
     margin: 20,
-    backgroundColor: 'white',
     borderRadius: 10,
     padding: 20,
     alignItems: 'center',
@@ -16,19 +15,17 @@ export const styles = StyleSheet.create({
   },
   modalText: {
     marginBottom: 15,
-    textAlign: 'center',
+    textAlign: 'left',
   },
   input: {
     height: 40,
-    borderColor: 'gray',
+    borderColor: '#EEEEEE',
     borderWidth: 1,
-    width: 200,
     paddingLeft: 8,
     marginBottom: 20,
   },
   buttonContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    width: 150,
   },
 });

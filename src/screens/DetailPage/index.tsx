@@ -1,6 +1,6 @@
-import React, { useMemo } from 'react';
-import { ScrollView } from 'react-native';
-import { connect } from "react-redux";
+import React, {useMemo} from 'react';
+import {ScrollView} from 'react-native';
+import {connect} from 'react-redux';
 import tw from 'twrnc';
 
 import {
@@ -26,41 +26,44 @@ import {
   DetailHeader,
   DetaiLDesc,
   DetailPokemon,
-  DetailData
+  DetailData,
+  DetailAction,
 } from './Sections';
-import { AppDispatch, RootState } from "../../redux/store";
-import { styles } from './styles';
-import { useDetail } from './useDetail';
+import {AppDispatch, RootState} from '../../redux/store';
+import {styles} from './styles';
+import {useDetail} from './useDetail';
 
-const DetailPage: React.FC<DetailPageProps> = (props) => {
+const DetailPage: React.FC<DetailPageProps> = props => {
   const dtl = useDetail(props);
 
   const _renderModal = useMemo(() => {
     return (
       <DetailModal
+        isMine={dtl.isMine}
         modalVisible={dtl.modalVisible}
         setModalVisible={dtl.setModalVisible}
         onConfirm={dtl.onConfirm}
         nickname={dtl.nickname}
         setNickname={dtl.setNickname}
       />
-    )
-  }, [dtl.pokemon, dtl.modalVisible, dtl.nickname]);
+    );
+  }, [dtl.pokemon, dtl.modalVisible, dtl.nickname, dtl.onConfirm]);
 
   return (
     <>
       {_renderModal}
-      <ScrollView 
+      <ScrollView
         showsVerticalScrollIndicator={false}
-        style={[tw`flex-1 w-full h-full`, { backgroundColor: dtl.bgColor }]}>
+        style={[tw`flex-1 w-full h-full`, {backgroundColor: dtl.bgColor}]}>
         <DetailHeader onBack={dtl.onBack} />
         <DetaiLDesc pokemon={dtl.pokemon} />
         <DetailPokemon pokemon={dtl.pokemon} />
-        <DetailData />
+        <DetailAction dtl={dtl} />
+        {/* <DetailData /> */}
       </ScrollView>
     </>
   );
-}
+};
 
 const mapStateToProps = (state: RootState) => ({
   findPokemonLoading: state.myPokemon.findPokemonLoading,
@@ -83,11 +86,14 @@ const mapStateToProps = (state: RootState) => ({
 const mapDispatchToProps = (dispatch: AppDispatch) => ({
   findPokemon: (payload: FindPokemonRequest) => dispatch(findPokemon(payload)),
   findPokemonReset: () => dispatch(findPokemonReset()),
-  catchPokemon: (payload: CatchPokemonRequest) => dispatch(catchPokemon(payload)),
+  catchPokemon: (payload: CatchPokemonRequest) =>
+    dispatch(catchPokemon(payload)),
   catchPokemonReset: () => dispatch(catchPokemonReset()),
-  releasePokemon: (payload: ReleasePokemonRequest) => dispatch(releasePokemon(payload)),
+  releasePokemon: (payload: ReleasePokemonRequest) =>
+    dispatch(releasePokemon(payload)),
   releasePokemonReset: () => dispatch(releasePokemonReset()),
-  renamePokemon: (payload: RenamePokemonRequest) => dispatch(renamePokemon(payload)),
+  renamePokemon: (payload: RenamePokemonRequest) =>
+    dispatch(renamePokemon(payload)),
   renamePokemonReset: () => dispatch(renamePokemonReset()),
 });
 

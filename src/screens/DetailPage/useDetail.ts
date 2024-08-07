@@ -1,7 +1,7 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
-import { Alert } from "react-native";
-import { DetailPageProps } from "../../types";
-import { getGifList, getPokeColors } from "../../utils";
+import {useCallback, useEffect, useMemo, useState} from 'react';
+import {Alert} from 'react-native';
+import {DetailPageProps} from '../../types';
+import {getGifList, getPokeColors} from '../../utils';
 
 export const useDetail = (props: DetailPageProps) => {
   const {
@@ -30,13 +30,11 @@ export const useDetail = (props: DetailPageProps) => {
     releasePokemonReset,
 
     navigation,
-    route: {
-      params,
-    },
+    route: {params},
   } = props;
   const [isCaught, setIsCaught] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
-  const [nickname, setNickname] = useState("");
+  const [nickname, setNickname] = useState('');
 
   const isDisabled = useMemo(() => {
     return isCaught && !params.id;
@@ -58,13 +56,13 @@ export const useDetail = (props: DetailPageProps) => {
         'Are you sure want to release?',
         [
           {
-            text: "Cancel",
+            text: 'Cancel',
             onPress: () => {},
             style: 'cancel',
           },
-          { text: "Ok", onPress: () => releasePokemon({ id: params.id }), }
+          {text: 'Ok', onPress: () => releasePokemon({id: params.id})},
         ],
-        { cancelable: true },
+        {cancelable: true},
       );
     } else {
       setModalVisible(true);
@@ -72,10 +70,10 @@ export const useDetail = (props: DetailPageProps) => {
   }, [isCaught, params]);
   const onConfirm = useCallback(() => {
     setModalVisible(false);
-    if (isCaught) {
-      return renamePokemon({ id: params.id, nickname });
+    if (isCaught && params.id) {
+      return renamePokemon({id: params.id, nickname});
     }
-    return catchPokemon({ nickname, url: params.url });
+    return catchPokemon({nickname, url: params.url});
   }, [nickname, params, isCaught]);
   const onRename = useCallback(() => {
     setModalVisible(true);
@@ -115,7 +113,7 @@ export const useDetail = (props: DetailPageProps) => {
     }
   }, [releasePokemonResponse]);
   useEffect(() => {
-    findPokemon({ url: params.url });
+    findPokemon({url: params.url});
   }, []);
   useEffect(() => {
     if (findPokemonError) {
@@ -149,4 +147,4 @@ export const useDetail = (props: DetailPageProps) => {
     setModalVisible,
     bgColor,
   };
-}
+};
