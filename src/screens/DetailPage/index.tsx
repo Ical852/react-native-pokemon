@@ -30,7 +30,6 @@ import {
   DetailAction,
 } from './Sections';
 import {AppDispatch, RootState} from '../../redux/store';
-import {styles} from './styles';
 import {useDetail} from './useDetail';
 
 const DetailPage: React.FC<DetailPageProps> = props => {
@@ -59,7 +58,7 @@ const DetailPage: React.FC<DetailPageProps> = props => {
         <DetaiLDesc pokemon={dtl.pokemon} />
         <DetailPokemon pokemon={dtl.pokemon} />
         <DetailAction dtl={dtl} />
-        {/* <DetailData /> */}
+        <DetailData dtl={dtl} />
       </ScrollView>
     </>
   );
